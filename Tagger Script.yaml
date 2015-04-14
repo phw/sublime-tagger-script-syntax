@@ -31,7 +31,6 @@ patterns:
 
 repository:
   parantheses:
-    name: comment.block.tagger_script
     begin: (?<!\\)\(
     end: (?<!\\)\)
     patterns:
