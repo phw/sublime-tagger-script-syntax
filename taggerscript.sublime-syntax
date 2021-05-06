@@ -1,0 +1,45 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: Tagger Script
+file_extensions: [pts]
+scope: source.taggerscript
+
+contexts:
+  main:
+    - match: \$noop\(
+      comment: Comments ($noop(...))
+      push:
+        - meta_scope: comment.block.taggerscript
+        - match: (?<!\\)\)
+          pop: true
+        - include: parantheses
+    - match: '\$[_a-zA-Z0-9]*\('
+      comment: Functions
+      captures:
+        0: support.function.taggerscript
+      push:
+        - meta_scope: meta.taggerscript
+        - match: (?<!\\)\)
+          captures:
+            0: support.function.taggerscript
+          pop: true
+        - include: main
+        - match: (?<!\\),
+          scope: support.function.taggerscript
+    - match: "%[_a-zA-Z0-9:]*%"
+      comment: Variables
+      scope: variable.parameter.taggerscript
+    - match: \\[^u]
+      comment: Escape sequences
+      scope: constant.character.escape.taggerscript
+    - match: \\u[a-fA-F0-9]{4}
+      comment: Unicode escape sequences
+      scope: constant.character.escape.taggerscript
+
+  parantheses:
+    - match: (?<!\\)\(
+      push:
+        - match: (?<!\\)\)
+          pop: true
+        - include: parantheses

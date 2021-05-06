@@ -1,0 +1,48 @@
+# SYNTAX TEST "taggerscript.sublime-syntax"
+
+$foo()
+# <- support.function.taggerscript
+
+%var%
+# <- variable.parameter.taggerscript
+
+foo \tbar
+# <- source.taggerscript
+#   ^ constant.character.escape.taggerscript
+#     ^ source.taggerscript
+
+\u2010bar
+# ^ constant.character.escape.taggerscript
+#     ^ source.taggerscript
+
+$noop(foo)
+# <- comment.block.taggerscript
+
+$foo(\)$noop(\())a
+# ^ support.function.taggerscript
+#    ^ constant.character.escape.taggerscript
+#      ^ comment.block.taggerscript
+#              ^ comment.block.taggerscript
+#               ^ support.function.taggerscript
+#                ^ source.taggerscript
+
+common text 1234
+# <- source.taggerscript
+
+$foo(\)$noop(%bar%),$f(\,,%var%)abc)end
+# ^ support.function.taggerscript
+#    ^ constant.character.escape.taggerscript
+#      ^ comment.block.taggerscript
+#            ^ comment.block.taggerscript
+#                   ^support.function.taggerscript
+#                      ^constant.character.escape.taggerscript
+#                         ^ variable.parameter.taggerscript
+#                              ^ support.function.taggerscript
+#                               ^ source.taggerscript
+#                                  ^ support.function.taggerscript
+#                                   ^ source.taggerscript
+
+foo$noopfunc(no comment$noop(proper comment))bar
+#  ^ support.function.taggerscript
+#                      ^ comment.block.taggerscript
+#                                           ^ support.function.taggerscript
