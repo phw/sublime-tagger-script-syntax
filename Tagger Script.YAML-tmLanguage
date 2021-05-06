@@ -27,7 +27,10 @@ patterns:
   match: "%[_a-zA-Z0-9:]*%"
 - comment: Escape sequences
   name: keyword.other.tagger_script
-  match: \\.
+  match: \\[^u]
+- comment: Unicode escape sequences
+  name: keyword.other.tagger_script
+  match: \\u[a-fA-F0-9]{4}
 
 repository:
   parantheses:

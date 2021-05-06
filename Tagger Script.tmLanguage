@@ -68,7 +68,15 @@
 			<key>comment</key>
 			<string>Escape sequences</string>
 			<key>match</key>
-			<string>\\.</string>
+			<string>\\[^u]</string>
+			<key>name</key>
+			<string>keyword.other.tagger_script</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Unicode escape sequences</string>
+			<key>match</key>
+			<string>\\u[a-fA-F0-9]{4}</string>
 			<key>name</key>
 			<string>keyword.other.tagger_script</string>
 		</dict>
